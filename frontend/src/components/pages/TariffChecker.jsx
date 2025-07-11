@@ -160,7 +160,7 @@ const TariffChecker = () => {
 
           <button
             onClick={calculateTariff}
-            className="btn btn-primary"
+            className="btn btn-primary w-full"
           >
             <Calculator size={16} />
             Calculate Tariffs
@@ -239,7 +239,7 @@ const TariffChecker = () => {
       {/* Tariff Comparison Table */}
       <div className="card mt-8">
         <h2 className="mb-4">Tariff Rates Comparison</h2>
-        <div className="tariff-table-container">
+        <div className="tariff-table-container overflow-x-auto">
           <table className="table">
             <thead>
               <tr>
@@ -300,19 +300,19 @@ const TariffChecker = () => {
           align-items: center;
           gap: 0.5rem;
           color: var(--text-tertiary);
-          font-size: 0.75rem;
+          font-size: clamp(0.7rem, 1.25vw, 0.75rem);
           margin-top: 0.25rem;
         }
 
         .no-results {
           text-align: center;
-          padding: 3rem;
+          padding: 2rem 1rem;
           color: var(--text-secondary);
         }
 
         .error-message {
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           gap: 0.75rem;
           padding: 1rem;
           background: #fef2f2;
@@ -328,16 +328,15 @@ const TariffChecker = () => {
         }
 
         .results-content {
-          space-y: 1.5rem;
-        }
-
-        .result-header {
-          margin-bottom: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
         }
 
         .result-header h3 {
           margin: 0;
           color: var(--text-primary);
+          font-size: clamp(1.125rem, 2vw, 1.25rem);
         }
 
         .tariff-overview {
@@ -345,7 +344,6 @@ const TariffChecker = () => {
           padding: 1.5rem;
           border-radius: 8px;
           text-align: center;
-          margin-bottom: 1.5rem;
         }
 
         .tariff-rate {
@@ -356,13 +354,13 @@ const TariffChecker = () => {
         }
 
         .rate-value {
-          font-size: 2.5rem;
+          font-size: clamp(2rem, 5vw, 2.5rem);
           font-weight: 700;
           color: var(--accent-primary);
         }
 
         .rate-label {
-          font-size: 0.875rem;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
           color: var(--text-secondary);
         }
 
@@ -370,7 +368,6 @@ const TariffChecker = () => {
           border: 1px solid var(--border-color);
           border-radius: 8px;
           overflow: hidden;
-          margin-bottom: 1.5rem;
         }
 
         .breakdown-item {
@@ -392,18 +389,19 @@ const TariffChecker = () => {
 
         .breakdown-label {
           color: var(--text-secondary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .breakdown-value {
           color: var(--text-primary);
           font-weight: 500;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .additional-info {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
           gap: 1rem;
-          margin-bottom: 1.5rem;
         }
 
         .info-item {
@@ -417,12 +415,12 @@ const TariffChecker = () => {
         }
 
         .info-label {
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
         .info-value {
-          font-size: 1.25rem;
+          font-size: clamp(1.125rem, 2vw, 1.25rem);
           font-weight: 600;
           color: var(--text-primary);
         }
@@ -444,19 +442,44 @@ const TariffChecker = () => {
 
         .tariff-note p {
           margin: 0;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .tariff-table-container {
           overflow-x: auto;
         }
 
-        @media (max-width: 768px) {
+        /* Mobile optimizations */
+        @media (min-width: 480px) {
+          .additional-info {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 767px) {
           .grid-2 {
             grid-template-columns: 1fr;
           }
           
+          .breakdown-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+          }
+          
+          .breakdown-value {
+            align-self: flex-end;
+          }
+        }
+
+        @media (max-width: 479px) {
           .additional-info {
             grid-template-columns: 1fr;
+          }
+          
+          .error-message {
+            flex-direction: column;
+            gap: 0.5rem;
           }
         }
       `}</style>

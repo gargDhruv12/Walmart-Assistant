@@ -300,7 +300,7 @@ const TradePlan = () => {
         <div className="form-actions">
           <button
             onClick={generateTradePlan}
-            className="btn btn-primary"
+            className="btn btn-primary w-full"
           >
             <FileText size={16} />
             Generate Trade Plan
@@ -559,8 +559,8 @@ const TradePlan = () => {
 
         .form-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 1.5rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
           margin-bottom: 1.5rem;
         }
 
@@ -577,29 +577,33 @@ const TradePlan = () => {
           justify-content: space-between;
           align-items: center;
           margin-bottom: 2rem;
+          flex-wrap: wrap;
+          gap: 1rem;
         }
 
         .plan-title h2 {
           margin: 0;
           color: var(--text-primary);
+          font-size: clamp(1.25rem, 2.5vw, 1.5rem);
         }
 
         .plan-title p {
           margin: 0;
           color: var(--text-secondary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .summary-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1.5rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
         }
 
         .summary-card {
           display: flex;
           align-items: center;
           gap: 1rem;
-          padding: 1.5rem;
+          padding: 1rem;
           background: var(--bg-secondary);
           border-radius: 8px;
         }
@@ -612,16 +616,17 @@ const TradePlan = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-shrink: 0;
         }
 
         .summary-value {
-          font-size: 1.25rem;
+          font-size: clamp(1.125rem, 2.5vw, 1.25rem);
           font-weight: 700;
           color: var(--text-primary);
         }
 
         .summary-label {
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
@@ -642,13 +647,14 @@ const TradePlan = () => {
           padding-bottom: 0.5rem;
           border-bottom: 1px solid var(--border-color);
           color: var(--text-primary);
+          font-size: clamp(1rem, 1.75vw, 1.125rem);
         }
 
         .detail-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0.75rem 1rem;
-          font-size: 0.875rem;
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .detail-grid span:nth-child(odd) {
@@ -673,6 +679,7 @@ const TradePlan = () => {
           padding: 0.75rem;
           background: var(--bg-secondary);
           border-radius: 6px;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .cost-item.total {
@@ -707,10 +714,11 @@ const TradePlan = () => {
         .timeline-title {
           font-weight: 600;
           color: var(--text-primary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .timeline-date {
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
@@ -733,10 +741,12 @@ const TradePlan = () => {
           background: var(--bg-secondary);
           border-radius: 6px;
           color: var(--text-primary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .document-item svg {
           color: var(--accent-primary);
+          flex-shrink: 0;
         }
 
         .risk-item {
@@ -750,46 +760,84 @@ const TradePlan = () => {
           justify-content: space-between;
           align-items: center;
           margin-bottom: 0.5rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
         .risk-name {
           font-weight: 600;
           color: var(--text-primary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .risk-mitigation {
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
-        @media (max-width: 768px) {
-          .plan-header {
-            flex-direction: column;
-            gap: 1rem;
-            align-items: stretch;
+        /* Mobile optimizations */
+        @media (min-width: 480px) {
+          .form-grid {
+            grid-template-columns: repeat(2, 1fr);
           }
           
           .summary-grid {
             grid-template-columns: repeat(2, 1fr);
           }
           
-          .plan-details,
-          .plan-appendix {
-            grid-template-columns: 1fr;
-          }
-          
-          .form-grid {
-            grid-template-columns: 1fr;
+          .detail-grid {
+            grid-template-columns: auto 1fr;
+            gap: 0.75rem 1rem;
           }
         }
 
-        @media (max-width: 480px) {
-          .summary-grid {
-            grid-template-columns: 1fr;
+        @media (min-width: 768px) {
+          .plan-header {
+            flex-wrap: nowrap;
           }
           
-          .detail-grid {
-            grid-template-columns: 1fr;
+          .summary-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+          
+          .plan-details,
+          .plan-appendix {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .form-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        @media (max-width: 479px) {
+          .plan-header {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          
+          .summary-card {
+            flex-direction: column;
+            text-align: center;
+            gap: 0.75rem;
+          }
+          
+          .timeline-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+          }
+          
+          .risk-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          
+          .cost-item {
+            flex-direction: column;
+            align-items: flex-start;
             gap: 0.5rem;
           }
         }

@@ -157,248 +157,245 @@ const CostEstimator = () => {
 
   return (
     <div className="cost-estimator">
-      <div className="page-header">
-        <h1>Landed Cost Estimator</h1>
-        <p>Calculate and compare total landed costs across suppliers</p>
-      </div>
-
-      {/* Input Form */}
-      <div className="card mb-6">
-        <h2 className="mb-4">Product Information</h2>
-        <div className="form-grid">
-          <div className="form-group">
-            <label className="form-label">Product Name</label>
-            <input
-              type="text"
-              value={formData.productName}
-              onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
-              placeholder="e.g., Men's Cotton Jackets"
-              className="form-input"
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">HS Code</label>
-            <select
-              value={formData.hsCode}
-              onChange={(e) => setFormData({ ...formData, hsCode: e.target.value })}
-              className="form-select"
-            >
-              <option value="6203">6203 - Men's Clothing</option>
-              <option value="6204">6204 - Women's Clothing</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">Quantity</label>
-            <input
-              type="number"
-              value={formData.quantity}
-              onChange={(e) => setFormData({ ...formData, quantity: parseInt(e.target.value) })}
-              className="form-input"
-            />
-          </div>
+      <div className="container">
+        <div className="page-header">
+          <h1>Landed Cost Estimator</h1>
+          <p>Calculate and compare total landed costs across suppliers</p>
         </div>
 
-        <div className="supplier-selection">
-          <h3 className="mb-4">Select Suppliers to Compare</h3>
-          <div className="suppliers-grid">
-            {suppliers.map(supplier => (
-              <div
-                key={supplier.id}
-                className={`supplier-option ${
-                  formData.selectedSuppliers.includes(supplier.id) ? 'selected' : ''
-                }`}
-                onClick={() => handleSupplierToggle(supplier.id)}
+        {/* Input Form */}
+        <div className="card mb-xl">
+          <h2 className="mb-lg">Product Information</h2>
+          <div className="form-grid grid grid-responsive-3 mb-xl">
+            <div className="form-group">
+              <label className="form-label">Product Name</label>
+              <input
+                type="text"
+                value={formData.productName}
+                onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
+                placeholder="e.g., Men's Cotton Jackets"
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">HS Code</label>
+              <select
+                value={formData.hsCode}
+                onChange={(e) => setFormData({ ...formData, hsCode: e.target.value })}
+                className="form-select"
               >
-                <div className="supplier-info">
-                  <h4>{supplier.name}</h4>
-                  <p>{supplier.city}, {supplier.country}</p>
-                  <div className="supplier-metrics">
-                    <span>${supplier.productCost}/unit</span>
-                    <span>{supplier.leadTime} days</span>
-                    <span>{supplier.reliability}% reliable</span>
+                <option value="6203">6203 - Men's Clothing</option>
+                <option value="6204">6204 - Women's Clothing</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Quantity</label>
+              <input
+                type="number"
+                value={formData.quantity}
+                onChange={(e) => setFormData({ ...formData, quantity: parseInt(e.target.value) })}
+                className="form-input"
+              />
+            </div>
+          </div>
+
+          <div className="supplier-selection">
+            <h3 className="mb-lg">Select Suppliers to Compare</h3>
+            <div className="suppliers-grid grid grid-auto">
+              {suppliers.map(supplier => (
+                <div
+                  key={supplier.id}
+                  className={`supplier-option ${
+                    formData.selectedSuppliers.includes(supplier.id) ? 'selected' : ''
+                  }`}
+                  onClick={() => handleSupplierToggle(supplier.id)}
+                >
+                  <div className="supplier-info">
+                    <h4>{supplier.name}</h4>
+                    <p>{supplier.city}, {supplier.country}</p>
+                    <div className="supplier-metrics">
+                      <span>${supplier.productCost}/unit</span>
+                      <span>{supplier.leadTime} days</span>
+                      <span>{supplier.reliability}% reliable</span>
+                    </div>
+                  </div>
+                  <div className="selection-indicator">
+                    {formData.selectedSuppliers.includes(supplier.id) && '✓'}
                   </div>
                 </div>
-                <div className="selection-indicator">
-                  {formData.selectedSuppliers.includes(supplier.id) && '✓'}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="form-actions">
-          <button
-            onClick={calculateEstimates}
-            disabled={loading || formData.selectedSuppliers.length === 0}
-            className="btn btn-primary"
-          >
-            <Calculator size={16} />
-            {loading ? 'Calculating...' : 'Calculate Costs'}
-          </button>
-        </div>
-      </div>
-
-      {/* Cost Comparison */}
-      {comparison && (
-        <div className="card mb-6">
-          <div className="comparison-header">
-            <h2>Cost Comparison Summary</h2>
-            <button onClick={downloadReport} className="btn btn-outline">
-              <Download size={16} />
-              Download Report
+          <div className="form-actions">
+            <button
+              onClick={calculateEstimates}
+              disabled={loading || formData.selectedSuppliers.length === 0}
+              className="btn btn-primary w-full"
+            >
+              <Calculator size={16} />
+              {loading ? 'Calculating...' : 'Calculate Costs'}
             </button>
           </div>
-          
-          <div className="comparison-metrics">
-            <div className="metric-card">
-              <div className="metric-value">{formatCurrency(comparison.bestOption.costs.totalLandedCost)}</div>
-              <div className="metric-label">Best Total Cost</div>
-              <div className="metric-detail">{comparison.bestOption.supplier.name}</div>
+        </div>
+
+        {/* Cost Comparison */}
+        {comparison && (
+          <div className="card mb-xl">
+            <div className="comparison-header">
+              <h2>Cost Comparison Summary</h2>
+              <button onClick={downloadReport} className="btn btn-outline">
+                <Download size={16} />
+                Download Report
+              </button>
             </div>
             
-            <div className="metric-card">
-              <div className="metric-value">{formatCurrency(comparison.totalSavings)}</div>
-              <div className="metric-label">Potential Savings</div>
-              <div className="metric-detail">vs Most Expensive Option</div>
-            </div>
-            
-            <div className="metric-card">
-              <div className="metric-value">{formatCurrency(comparison.averageCost)}</div>
-              <div className="metric-label">Average Cost</div>
-              <div className="metric-detail">Across All Options</div>
-            </div>
-            
-            <div className="metric-card">
-              <div className="metric-value">{comparison.bestOption.logistics.transitTime} days</div>
-              <div className="metric-label">Best Option Transit</div>
-              <div className="metric-detail">Including Delays</div>
+            <div className="comparison-metrics grid grid-responsive-4">
+              <div className="metric-card">
+                <div className="metric-value">{formatCurrency(comparison.bestOption.costs.totalLandedCost)}</div>
+                <div className="metric-label">Best Total Cost</div>
+                <div className="metric-detail">{comparison.bestOption.supplier.name}</div>
+              </div>
+              
+              <div className="metric-card">
+                <div className="metric-value">{formatCurrency(comparison.totalSavings)}</div>
+                <div className="metric-label">Potential Savings</div>
+                <div className="metric-detail">vs Most Expensive Option</div>
+              </div>
+              
+              <div className="metric-card">
+                <div className="metric-value">{formatCurrency(comparison.averageCost)}</div>
+                <div className="metric-label">Average Cost</div>
+                <div className="metric-detail">Across All Options</div>
+              </div>
+              
+              <div className="metric-card">
+                <div className="metric-value">{comparison.bestOption.logistics.transitTime} days</div>
+                <div className="metric-label">Best Option Transit</div>
+                <div className="metric-detail">Including Delays</div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Detailed Estimates */}
-      {estimates.length > 0 && (
-        <div className="estimates-section">
-          <h2 className="mb-6">Detailed Cost Breakdown</h2>
-          
-          <div className="estimates-grid">
-            {estimates.map((estimate, index) => {
-              const ranking = getCostRanking(index)
-              return (
-                <div key={estimate.supplier.id} className="estimate-card card">
-                  <div className="estimate-header">
-                    <div className="supplier-info">
-                      <h3>{estimate.supplier.name}</h3>
-                      <p>{estimate.supplier.city}, {estimate.supplier.country}</p>
+        {/* Detailed Estimates */}
+        {estimates.length > 0 && (
+          <div className="estimates-section">
+            <h2 className="mb-xl">Detailed Cost Breakdown</h2>
+            
+            <div className="estimates-grid grid grid-auto">
+              {estimates.map((estimate, index) => {
+                const ranking = getCostRanking(index)
+                return (
+                  <div key={estimate.supplier.id} className="estimate-card card">
+                    <div className="estimate-header">
+                      <div className="supplier-info">
+                        <h3>{estimate.supplier.name}</h3>
+                        <p>{estimate.supplier.city}, {estimate.supplier.country}</p>
+                      </div>
+                      <div className="ranking">
+                        <span className={`status ${ranking.color}`}>
+                          {ranking.label}
+                        </span>
+                      </div>
                     </div>
-                    <div className="ranking">
-                      <span className={`status ${ranking.color}`}>
-                        {ranking.label}
-                      </span>
+
+                    <div className="cost-summary">
+                      <div className="total-cost">
+                        <span className="cost-value">{formatCurrency(estimate.costs.totalLandedCost)}</span>
+                        <span className="cost-label">Total Landed Cost</span>
+                      </div>
+                      <div className="unit-cost">
+                        <span className="cost-value">{formatCurrency(estimate.costs.costPerUnit)}</span>
+                        <span className="cost-label">Per Unit</span>
+                      </div>
+                    </div>
+
+                    {estimate.savings > 0 && (
+                      <div className="savings-badge">
+                        Saves {formatCurrency(estimate.savings)}
+                      </div>
+                    )}
+
+                    <div className="cost-breakdown">
+                      <h4>Cost Breakdown</h4>
+                      <div className="breakdown-items">
+                        <div className="breakdown-item">
+                          <span>Product Cost</span>
+                          <span>{formatCurrency(estimate.costs.productCost)}</span>
+                        </div>
+                        <div className="breakdown-item">
+                          <span>Tariffs ({estimate.logistics.tariffRate}%)</span>
+                          <span>{formatCurrency(estimate.costs.tariffCost)}</span>
+                        </div>
+                        <div className="breakdown-item">
+                          <span>Shipping</span>
+                          <span>{formatCurrency(estimate.costs.shippingCost)}</span>
+                        </div>
+                        <div className="breakdown-item">
+                          <span>Insurance</span>
+                          <span>{formatCurrency(estimate.costs.insuranceCost)}</span>
+                        </div>
+                        <div className="breakdown-item">
+                          <span>Customs & Documentation</span>
+                          <span>{formatCurrency(estimate.costs.customsBrokerFee + estimate.costs.documentationFee)}</span>
+                        </div>
+                        <div className="breakdown-item">
+                          <span>Warehouse & Handling</span>
+                          <span>{formatCurrency(estimate.costs.warehouseFee)}</span>
+                        </div>
+                        <div className="breakdown-item">
+                          <span>Delay Costs</span>
+                          <span>{formatCurrency(estimate.costs.delayPenalty)}</span>
+                        </div>
+                        <div className="breakdown-item">
+                          <span>Risk Premium</span>
+                          <span>{formatCurrency(estimate.costs.riskPremium)}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="logistics-info">
+                      <h4>Logistics Details</h4>
+                      <div className="logistics-details">
+                        <div>Transit Port: {estimate.logistics.port.name}</div>
+                        <div>Transit Time: {estimate.logistics.transitTime} days</div>
+                        <div>Lead Time: {estimate.supplier.leadTime} days</div>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="cost-summary">
-                    <div className="total-cost">
-                      <span className="cost-value">{formatCurrency(estimate.costs.totalLandedCost)}</span>
-                      <span className="cost-label">Total Landed Cost</span>
-                    </div>
-                    <div className="unit-cost">
-                      <span className="cost-value">{formatCurrency(estimate.costs.costPerUnit)}</span>
-                      <span className="cost-label">Per Unit</span>
-                    </div>
-                  </div>
-
-                  {estimate.savings > 0 && (
-                    <div className="savings-badge">
-                      Saves {formatCurrency(estimate.savings)}
-                    </div>
-                  )}
-
-                  <div className="cost-breakdown">
-                    <h4>Cost Breakdown</h4>
-                    <div className="breakdown-items">
-                      <div className="breakdown-item">
-                        <span>Product Cost</span>
-                        <span>{formatCurrency(estimate.costs.productCost)}</span>
-                      </div>
-                      <div className="breakdown-item">
-                        <span>Tariffs ({estimate.logistics.tariffRate}%)</span>
-                        <span>{formatCurrency(estimate.costs.tariffCost)}</span>
-                      </div>
-                      <div className="breakdown-item">
-                        <span>Shipping</span>
-                        <span>{formatCurrency(estimate.costs.shippingCost)}</span>
-                      </div>
-                      <div className="breakdown-item">
-                        <span>Insurance</span>
-                        <span>{formatCurrency(estimate.costs.insuranceCost)}</span>
-                      </div>
-                      <div className="breakdown-item">
-                        <span>Customs & Documentation</span>
-                        <span>{formatCurrency(estimate.costs.customsBrokerFee + estimate.costs.documentationFee)}</span>
-                      </div>
-                      <div className="breakdown-item">
-                        <span>Warehouse & Handling</span>
-                        <span>{formatCurrency(estimate.costs.warehouseFee)}</span>
-                      </div>
-                      <div className="breakdown-item">
-                        <span>Delay Costs</span>
-                        <span>{formatCurrency(estimate.costs.delayPenalty)}</span>
-                      </div>
-                      <div className="breakdown-item">
-                        <span>Risk Premium</span>
-                        <span>{formatCurrency(estimate.costs.riskPremium)}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="logistics-info">
-                    <h4>Logistics Details</h4>
-                    <div className="logistics-details">
-                      <div>Transit Port: {estimate.logistics.port.name}</div>
-                      <div>Transit Time: {estimate.logistics.transitTime} days</div>
-                      <div>Lead Time: {estimate.supplier.leadTime} days</div>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <style jsx>{`
         .page-header {
           text-align: center;
-          margin-bottom: 2rem;
+          margin-bottom: var(--spacing-2xl);
         }
 
         .form-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 1.5rem;
-          margin-bottom: 2rem;
+          margin-bottom: var(--spacing-xl);
         }
 
         .supplier-selection {
-          margin-bottom: 2rem;
+          margin-bottom: var(--spacing-xl);
         }
 
         .suppliers-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 1rem;
+          gap: var(--spacing-md);
         }
 
         .supplier-option {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 1rem;
+          padding: var(--spacing-lg);
           border: 1px solid var(--border-color);
           border-radius: 8px;
           cursor: pointer;
@@ -412,26 +409,28 @@ const CostEstimator = () => {
 
         .supplier-option.selected {
           border-color: var(--accent-primary);
-          background: var(--accent-primary)05;
+          background: rgba(59, 130, 246, 0.05);
           box-shadow: var(--shadow-md);
         }
 
         .supplier-info h4 {
-          margin: 0 0 0.25rem 0;
+          margin: 0 0 var(--spacing-xs) 0;
           color: var(--text-primary);
+          font-size: clamp(1rem, 2vw, 1.125rem);
         }
 
         .supplier-info p {
-          margin: 0 0 0.5rem 0;
+          margin: 0 0 var(--spacing-sm) 0;
           color: var(--text-secondary);
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.5vw, 0.875rem);
         }
 
         .supplier-metrics {
           display: flex;
-          gap: 1rem;
-          font-size: 0.75rem;
+          gap: var(--spacing-sm);
+          font-size: clamp(0.7rem, 1.25vw, 0.75rem);
           color: var(--text-tertiary);
+          flex-wrap: wrap;
         }
 
         .selection-indicator {
@@ -444,6 +443,7 @@ const CostEstimator = () => {
           align-items: center;
           justify-content: center;
           font-weight: bold;
+          flex-shrink: 0;
         }
 
         .supplier-option:not(.selected) .selection-indicator {
@@ -459,60 +459,64 @@ const CostEstimator = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 2rem;
+          margin-bottom: var(--spacing-xl);
+          flex-wrap: wrap;
+          gap: var(--spacing-md);
         }
 
         .comparison-metrics {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1.5rem;
+          gap: var(--spacing-lg);
         }
 
         .metric-card {
           text-align: center;
-          padding: 1.5rem;
+          padding: var(--spacing-xl) var(--spacing-md);
           background: var(--bg-secondary);
           border-radius: 8px;
         }
 
         .metric-value {
-          font-size: 1.75rem;
+          font-size: clamp(1.25rem, 3vw, 1.75rem);
           font-weight: 700;
           color: var(--accent-primary);
           display: block;
-          margin-bottom: 0.5rem;
+          margin-bottom: var(--spacing-sm);
         }
 
         .metric-label {
           font-weight: 600;
           color: var(--text-primary);
-          margin-bottom: 0.25rem;
+          margin-bottom: var(--spacing-xs);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .metric-detail {
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
         .estimates-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-          gap: 2rem;
+          gap: var(--spacing-xl);
         }
 
         .estimate-card {
-          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-lg);
+          height: 100%;
         }
 
         .estimate-header {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          margin-bottom: 1.5rem;
+          flex-wrap: wrap;
+          gap: var(--spacing-md);
         }
 
         .estimate-header .supplier-info h3 {
-          margin: 0 0 0.25rem 0;
+          margin: 0 0 var(--spacing-xs) 0;
+          font-size: clamp(1.125rem, 2vw, 1.25rem);
         }
 
         .estimate-header .supplier-info p {
@@ -522,10 +526,9 @@ const CostEstimator = () => {
 
         .cost-summary {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-          margin-bottom: 1rem;
-          padding: 1rem;
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+          padding: var(--spacing-lg);
           background: var(--bg-secondary);
           border-radius: 8px;
         }
@@ -536,95 +539,93 @@ const CostEstimator = () => {
         }
 
         .cost-value {
-          font-size: 1.25rem;
+          font-size: clamp(1.125rem, 2.5vw, 1.25rem);
           font-weight: 700;
           color: var(--text-primary);
           display: block;
         }
 
         .cost-label {
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
         .savings-badge {
           background: var(--accent-success);
           color: white;
-          padding: 0.5rem 1rem;
+          padding: var(--spacing-sm) var(--spacing-md);
           border-radius: 20px;
           text-align: center;
           font-weight: 500;
-          margin-bottom: 1rem;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .cost-breakdown,
         .logistics-info {
-          margin-bottom: 1.5rem;
+          flex: 1;
         }
 
         .cost-breakdown h4,
         .logistics-info h4 {
-          margin: 0 0 1rem 0;
-          padding-bottom: 0.5rem;
+          margin: 0 0 var(--spacing-md) 0;
+          padding-bottom: var(--spacing-sm);
           border-bottom: 1px solid var(--border-color);
           color: var(--text-primary);
+          font-size: clamp(1rem, 1.75vw, 1.125rem);
         }
 
         .breakdown-items {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: var(--spacing-sm);
         }
 
         .breakdown-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0.5rem;
+          padding: var(--spacing-sm);
           background: var(--bg-secondary);
           border-radius: 4px;
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
         }
 
         .logistics-details {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
-          font-size: 0.875rem;
+          gap: var(--spacing-sm);
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
-        @media (max-width: 768px) {
-          .form-grid {
-            grid-template-columns: 1fr;
-          }
-          
-          .suppliers-grid {
-            grid-template-columns: 1fr;
-          }
-          
-          .comparison-metrics {
+        /* Mobile optimizations */
+        @media (min-width: 480px) {
+          .cost-summary {
             grid-template-columns: repeat(2, 1fr);
           }
-          
-          .estimates-grid {
-            grid-template-columns: 1fr;
+        }
+
+        @media (max-width: 479px) {
+          .supplier-option {
+            flex-direction: column;
+            gap: var(--spacing-md);
+            text-align: center;
           }
           
           .comparison-header {
             flex-direction: column;
-            gap: 1rem;
             align-items: stretch;
           }
-        }
-
-        @media (max-width: 480px) {
-          .comparison-metrics {
-            grid-template-columns: 1fr;
+          
+          .estimate-header {
+            flex-direction: column;
+            align-items: flex-start;
           }
           
-          .cost-summary {
-            grid-template-columns: 1fr;
+          .breakdown-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--spacing-xs);
           }
         }
       `}</style>

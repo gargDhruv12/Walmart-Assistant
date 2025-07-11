@@ -178,7 +178,7 @@ const RoutePlanner = () => {
             <MapContainer
               center={mapCenter}
               zoom={mapZoom}
-              style={{ height: '400px', width: '100%' }}
+              style={{ height: '100%', width: '100%' }}
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -386,18 +386,19 @@ const RoutePlanner = () => {
 
         .route-config {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: 1fr;
           gap: 1.5rem;
         }
 
         .map-container {
           border-radius: 8px;
           overflow: hidden;
+          height: 300px;
         }
 
         .no-routes {
           text-align: center;
-          padding: 3rem;
+          padding: 2rem 1rem;
           color: var(--text-secondary);
         }
 
@@ -433,6 +434,8 @@ const RoutePlanner = () => {
           justify-content: space-between;
           align-items: center;
           margin-bottom: 0.75rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
         .route-title {
@@ -441,19 +444,21 @@ const RoutePlanner = () => {
           gap: 0.5rem;
           font-weight: 600;
           color: var(--text-primary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .route-metrics {
           display: flex;
           gap: 1rem;
           margin-bottom: 0.75rem;
+          flex-wrap: wrap;
         }
 
         .metric {
           display: flex;
           align-items: center;
           gap: 0.25rem;
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-secondary);
         }
 
@@ -461,13 +466,14 @@ const RoutePlanner = () => {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-tertiary);
+          flex-wrap: wrap;
         }
 
         .route-details {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: 1fr;
           gap: 2rem;
         }
 
@@ -476,6 +482,7 @@ const RoutePlanner = () => {
           color: var(--text-primary);
           border-bottom: 1px solid var(--border-color);
           padding-bottom: 0.5rem;
+          font-size: clamp(1.125rem, 2vw, 1.25rem);
         }
 
         .segments {
@@ -495,16 +502,20 @@ const RoutePlanner = () => {
           justify-content: space-between;
           align-items: center;
           margin-bottom: 0.5rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
         .segment-title {
           font-weight: 600;
           color: var(--text-primary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .segment-distance {
           font-weight: 500;
           color: var(--accent-primary);
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .segment-details {
@@ -513,10 +524,12 @@ const RoutePlanner = () => {
           gap: 0.5rem;
           margin-bottom: 0.5rem;
           color: var(--text-secondary);
+          flex-wrap: wrap;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .segment-time {
-          font-size: 0.875rem;
+          font-size: clamp(0.75rem, 1.25vw, 0.875rem);
           color: var(--text-tertiary);
         }
 
@@ -535,6 +548,7 @@ const RoutePlanner = () => {
           padding: 0.75rem;
           background: var(--bg-secondary);
           border-radius: 6px;
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
         }
 
         .cost-item.total {
@@ -543,21 +557,55 @@ const RoutePlanner = () => {
           font-weight: 600;
         }
 
-        @media (max-width: 768px) {
-          .grid-2 {
-            grid-template-columns: 1fr;
+        /* Mobile optimizations */
+        @media (min-width: 480px) {
+          .route-config {
+            grid-template-columns: repeat(2, 1fr);
           }
           
-          .route-config {
-            grid-template-columns: 1fr;
+          .map-container {
+            height: 350px;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          
+          .map-container {
+            height: 400px;
           }
           
           .route-details {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        @media (max-width: 479px) {
+          .route-header {
+            flex-direction: column;
+            align-items: flex-start;
           }
           
           .route-metrics {
             flex-direction: column;
+            gap: 0.5rem;
+          }
+          
+          .route-path {
+            justify-content: center;
+          }
+          
+          .segment-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          
+          .cost-item,
+          .risk-item {
+            flex-direction: column;
+            align-items: flex-start;
             gap: 0.5rem;
           }
         }

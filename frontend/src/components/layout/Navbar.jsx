@@ -62,172 +62,250 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
         <div className="mobile-nav">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          <div className="mobile-nav-container">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
 
       <style jsx>{`
         .navbar {
-          background: var(--bg-primary);
+          background: var(--bg-secondary);
           border-bottom: 1px solid var(--border-color);
           position: sticky;
           top: 0;
           z-index: 1000;
           box-shadow: var(--shadow-sm);
+          width: 100vw;
         }
 
         .navbar-container {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 0 2rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
           height: 4rem;
+          width: 100%;
+          padding: 0 var(--space-4);
+          max-width: 100%;
         }
 
         .navbar-brand {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: var(--space-3);
           text-decoration: none;
           color: var(--text-primary);
+          flex-shrink: 0;
         }
 
         .brand-icon {
           color: var(--accent-primary);
+          flex-shrink: 0;
         }
 
         .brand-text {
           font-weight: 700;
-          font-size: 1.25rem;
+          font-size: clamp(var(--text-base), 2.5vw, var(--text-xl));
+          white-space: nowrap;
         }
 
         .navbar-nav {
-          display: flex;
-          gap: 2rem;
+          display: none;
+          gap: var(--space-8);
+          flex: 1;
+          justify-content: center;
+          max-width: 600px;
         }
 
         .nav-link {
           color: var(--text-secondary);
           text-decoration: none;
           font-weight: 500;
-          padding: 0.5rem 0;
+          padding: var(--space-2) var(--space-3);
           position: relative;
-          transition: color 0.3s ease;
+          transition: color var(--transition-fast);
+          white-space: nowrap;
+          font-size: var(--text-base);
+          border-radius: var(--radius-md);
         }
 
         .nav-link:hover {
           color: var(--accent-primary);
+          background: var(--primary-50);
+        }
+
+        .dark .nav-link:hover {
+          background: rgb(59 130 246 / 0.1);
         }
 
         .nav-link.active {
           color: var(--accent-primary);
+          background: var(--primary-50);
         }
 
-        .nav-link.active::after {
-          content: '';
-          position: absolute;
-          bottom: -1rem;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: var(--accent-primary);
+        .dark .nav-link.active {
+          background: rgb(59 130 246 / 0.1);
         }
 
         .navbar-actions {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: var(--space-2);
+          flex-shrink: 0;
         }
 
-        .theme-toggle {
+        .theme-toggle,
+        .mobile-menu-toggle {
           background: none;
           border: none;
           color: var(--text-secondary);
           cursor: pointer;
-          padding: 0.5rem;
-          border-radius: 6px;
-          transition: all 0.3s ease;
+          padding: var(--space-2);
+          border-radius: var(--radius-md);
+          transition: all var(--transition-fast);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 40px;
+          min-height: 40px;
         }
 
-        .theme-toggle:hover {
-          background: var(--bg-secondary);
+        .theme-toggle:hover,
+        .mobile-menu-toggle:hover {
+          background: var(--bg-tertiary);
           color: var(--accent-primary);
         }
 
-        .mobile-menu-toggle {
-          display: none;
-          background: none;
-          border: none;
-          color: var(--text-secondary);
-          cursor: pointer;
-          padding: 0.5rem;
-        }
-
         .desktop-nav {
-          display: flex;
+          display: none;
         }
 
         .mobile-nav {
-          display: none;
-          background: var(--bg-primary);
+          background: var(--bg-secondary);
           border-top: 1px solid var(--border-color);
-          padding: 1rem 2rem;
+          box-shadow: var(--shadow-lg);
+          width: 100vw;
+        }
+
+        .mobile-nav-container {
+          display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: var(--space-1);
+          padding: var(--space-4);
+          max-width: 100%;
         }
 
         .mobile-nav-link {
           color: var(--text-secondary);
           text-decoration: none;
           font-weight: 500;
-          padding: 0.75rem 0;
-          border-bottom: 1px solid var(--border-color);
+          padding: var(--space-4);
+          border-radius: var(--radius-lg);
+          transition: all var(--transition-fast);
+          display: block;
+          font-size: var(--text-base);
         }
 
-        .mobile-nav-link:last-child {
-          border-bottom: none;
+        .mobile-nav-link:hover {
+          background: var(--bg-tertiary);
+          color: var(--accent-primary);
         }
 
         .mobile-nav-link.active {
           color: var(--accent-primary);
+          background: var(--primary-50);
         }
 
-        @media (max-width: 768px) {
+        .dark .mobile-nav-link.active {
+          background: rgb(59 130 246 / 0.1);
+        }
+
+        /* Tablet and up */
+        @media (min-width: 768px) {
           .navbar-container {
-            padding: 0 1rem;
+            padding: 0 var(--space-6);
           }
-
+          
           .desktop-nav {
-            display: none;
-          }
-
-          .mobile-menu-toggle {
-            display: block;
-          }
-
-          .mobile-nav {
             display: flex;
           }
 
-          .brand-text {
-            font-size: 1rem;
+          .mobile-menu-toggle {
+            display: none;
+          }
+
+          .mobile-nav {
+            display: none;
+          }
+
+          .navbar-actions {
+            gap: var(--space-3);
           }
         }
 
+        /* Large screens */
+        @media (min-width: 1024px) {
+          .navbar-container {
+            padding: 0 var(--space-8);
+          }
+          
+          .navbar-nav {
+            gap: var(--space-10);
+            max-width: 800px;
+          }
+        }
+
+        /* Extra large screens */
+        @media (min-width: 1280px) {
+          .navbar-container {
+            padding: 0 var(--space-10);
+          }
+        }
+
+        @media (min-width: 1400px) {
+          .navbar-container {
+            padding: 0 var(--space-12);
+          }
+          
+          .navbar-nav {
+            max-width: 1000px;
+          }
+        }
+
+        @media (min-width: 1600px) {
+          .navbar-container {
+            padding: 0 var(--space-16);
+          }
+        }
+
+        /* Very small screens */
         @media (max-width: 480px) {
+          .navbar-container {
+            padding: 0 var(--space-3);
+          }
+          
           .brand-text {
             display: none;
+          }
+
+          .navbar-actions {
+            gap: var(--space-1);
+          }
+        }
+
+        /* Landscape mobile */
+        @media (max-width: 767px) and (orientation: landscape) {
+          .navbar-container {
+            height: 3.5rem;
           }
         }
       `}</style>
