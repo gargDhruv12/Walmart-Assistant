@@ -1,0 +1,54 @@
+{
+  "6203": {
+    "rates": {
+      "India-USA": { "rate": 16.6, "description": "Men's clothing from India" },
+      "Vietnam-USA": { "rate": 17.0, "description": "Men's clothing from Vietnam" },
+      "Bangladesh-USA": { "rate": 15.3, "description": "Men's clothing from Bangladesh" },
+      "Thailand-USA": { "rate": 17.7, "description": "Men's clothing from Thailand" },
+      "Indonesia-USA": { "rate": 16.2, "description": "Men's clothing from Indonesia" },
+      "China-USA": { "rate": 27.8, "description": "Men's clothing from China (Trade War Impact)" },
+      "Turkey-USA": { "rate": 18.5, "description": "Men's clothing from Turkey" },
+      "Brazil-USA": { "rate": 14.9, "description": "Men's clothing from Brazil" },
+      "Italy-USA": { "rate": 19.2, "description": "Men's clothing from Italy" },
+      "Egypt-USA": { "rate": 15.8, "description": "Men's clothing from Egypt" },
+      "South Africa-USA": { "rate": 16.0, "description": "Men's clothing from South Africa" },
+      "UAE-USA": { "rate": 17.1, "description": "Men's clothing from UAE" }
+    }
+  },
+  "6104": {
+    "rates": {
+      "India-USA": { "rate": 15.2, "description": "Women's clothing from India" },
+      "Vietnam-USA": { "rate": 15.7, "description": "Women's clothing from Vietnam" },
+      "China-USA": { "rate": 25.3, "description": "Women's clothing from China (Trade War Impact)" },
+      "Turkey-USA": { "rate": 16.8, "description": "Women's clothing from Turkey" },
+      "Brazil-USA": { "rate": 13.9, "description": "Women's clothing from Brazil" },
+      "Italy-USA": { "rate": 18.0, "description": "Women's clothing from Italy" },
+      "Egypt-USA": { "rate": 14.5, "description": "Women's clothing from Egypt" },
+      "Thailand-USA": { "rate": 16.3, "description": "Women's clothing from Thailand" },
+      "Bangladesh-USA": { "rate": 14.8, "description": "Women's clothing from Bangladesh" },
+      "South Africa-USA": { "rate": 15.5, "description": "Women's clothing from South Africa" },
+      "UAE-USA": { "rate": 16.2, "description": "Women's clothing from UAE" }
+    }
+  },
+  "5201": {
+    "rates": {
+      "India-USA": { "rate": 2.5, "description": "Raw cotton from India" },
+      "Brazil-USA": { "rate": 2.1, "description": "Raw cotton from Brazil" },
+      "USA-India": { "rate": 3.0, "description": "Raw cotton from USA to India" },
+      "Egypt-USA": { "rate": 2.8, "description": "Raw cotton from Egypt" },
+      "China-USA": { "rate": 4.2, "description": "Raw cotton from China (Trade War Impact)" },
+      "Turkey-USA": { "rate": 2.7, "description": "Raw cotton from Turkey" },
+      "Vietnam-USA": { "rate": 2.9, "description": "Raw cotton from Vietnam" }
+    }
+  },
+  "5101": {
+    "rates": {
+      "South Africa-USA": { "rate": 3.5, "description": "Wool from South Africa" },
+      "Australia-USA": { "rate": 3.2, "description": "Wool from Australia" },
+      "China-USA": { "rate": 4.0, "description": "Wool from China (Trade War Impact)" },
+      "India-USA": { "rate": 3.7, "description": "Wool from India" },
+      "Turkey-USA": { "rate": 3.6, "description": "Wool from Turkey" },
+      "Italy-USA": { "rate": 3.8, "description": "Wool from Italy" }
+    }
+  }
+}

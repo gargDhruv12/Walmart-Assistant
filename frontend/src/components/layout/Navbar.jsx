@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Moon, Sun, Globe, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
-const Navbar = ({ isDarkMode, toggleDarkMode }) => {
+const Navbar = ({ onLogout, isAuthenticated }) => {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -12,8 +12,18 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     { path: '/tariffs', label: 'Tariffs' },
     { path: '/routes', label: 'Routes' },
     { path: '/costs', label: 'Costs' },
-    { path: '/plan', label: 'Trade Plan' }
+    { path: '/plan', label: 'Trade Plan' },
+    { path: '/?wizard=1', label: 'Trade Planning Wizard' }
   ]
+
+  const stepRoutes = [
+    { path: '/', label: 'Dashboard' },
+    { path: '/suppliers', label: 'Supplier Finder' },
+    { path: '/tariffs', label: 'Tariff Checker' },
+    { path: '/routes', label: 'Route Planner' },
+    { path: '/costs', label: 'Cost Estimator' }
+  ];
+  const currentStepIndex = stepRoutes.findIndex(step => location.pathname === step.path);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -26,55 +36,25 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           <Globe className="brand-icon" />
           <span className="brand-text">Walmart Trade Assistant</span>
         </div>
-
-        {/* Desktop Navigation */}
-        <div className="navbar-nav desktop-nav">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
-            >
-              {item.label}
-            </Link>
+        <div className="navbar-flow-indicator">
+          {stepRoutes.map((step, idx) => (
+            <>
+              <span
+                key={step.path}
+                className={`flow-step${idx === currentStepIndex ? ' active' : ''}`}
+              >
+                {step.label}
+              </span>
+              {idx < stepRoutes.length - 1 && <span className="flow-arrow">→</span>}
+            </>
           ))}
         </div>
-
         <div className="navbar-actions">
-          <button
-            onClick={toggleDarkMode}
-            className="theme-toggle"
-            aria-label="Toggle dark mode"
-          >
-            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-
-          <button
-            onClick={toggleMobileMenu}
-            className="mobile-menu-toggle"
-            aria-label="Toggle mobile menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {isAuthenticated && (
+            <button className="btn btn-outline" onClick={onLogout} style={{marginLeft: 12}}>Logout</button>
+          )}
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <div className="mobile-nav">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      )}
-
       <style jsx>{`
         .navbar {
           background: var(--bg-primary);
@@ -201,6 +181,28 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
         .mobile-nav-link.active {
           color: var(--accent-primary);
+        }
+
+        .navbar-flow-indicator {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+        }
+        .flow-step {
+          padding: 0.25rem 0.5rem;
+          border-radius: 4px;
+          background: var(--bg-secondary);
+          transition: background 0.2s, color 0.2s;
+        }
+        .flow-step.active {
+          background: var(--accent-primary);
+          color: #fff;
+        }
+        .flow-arrow {
+          color: var(--accent-primary);
+          font-size: 1.2rem;
         }
 
         @media (max-width: 768px) {

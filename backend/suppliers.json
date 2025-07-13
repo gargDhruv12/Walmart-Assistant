@@ -1,0 +1,249 @@
+[
+  {
+    "id": 1,
+    "name": "Global Textiles Ltd",
+    "country": "India",
+    "city": "Mumbai",
+    "coordinates": [19.0760, 72.8777],
+    "certifications": ["ISO 9001", "GOTS", "OEKO-TEX"],
+    "leadTime": 27,
+    "reliability": 92,
+    "productCost": 19.50,
+    "minOrderQuantity": 1000,
+    "specialties": ["Cotton Garments", "Organic Materials"],
+    "rating": 4.6,
+    "yearsInBusiness": 15,
+    "contact": {
+      "email": "contact@globaltextiles.in",
+      "phone": "+91 22 1234 5678"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Shanghai Silk Corp",
+    "country": "China",
+    "city": "Shanghai",
+    "coordinates": [31.2304, 121.4737],
+    "certifications": ["ISO 14001", "OEKO-TEX"],
+    "leadTime": 22,
+    "reliability": 89,
+    "productCost": 17.80,
+    "minOrderQuantity": 1200,
+    "specialties": ["Silk Fabrics", "Luxury Textiles"],
+    "rating": 4.4,
+    "yearsInBusiness": 12,
+    "contact": {
+      "email": "info@shanghaisilk.cn",
+      "phone": "+86 21 8765 4321"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Istanbul Denim Works",
+    "country": "Turkey",
+    "city": "Istanbul",
+    "coordinates": [41.0082, 28.9784],
+    "certifications": ["ISO 9001", "BSCI"],
+    "leadTime": 19,
+    "reliability": 94,
+    "productCost": 21.00,
+    "minOrderQuantity": 900,
+    "specialties": ["Denim Jeans", "Washed Denim"],
+    "rating": 4.7,
+    "yearsInBusiness": 18,
+    "contact": {
+      "email": "sales@istanbuldenim.com.tr",
+      "phone": "+90 212 555 1234"
+    }
+  },
+  {
+    "id": 4,
+    "name": "São Paulo Cotton Mills",
+    "country": "Brazil",
+    "city": "São Paulo",
+    "coordinates": [-23.5505, -46.6333],
+    "certifications": ["ISO 9001", "Fair Trade"],
+    "leadTime": 25,
+    "reliability": 87,
+    "productCost": 18.90,
+    "minOrderQuantity": 1100,
+    "specialties": ["Cotton Yarn", "Organic Cotton"],
+    "rating": 4.3,
+    "yearsInBusiness": 14,
+    "contact": {
+      "email": "contact@spcotton.com.br",
+      "phone": "+55 11 2345 6789"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Milan Fashion Textiles",
+    "country": "Italy",
+    "city": "Milan",
+    "coordinates": [45.4642, 9.1900],
+    "certifications": ["ISO 9001", "OEKO-TEX", "GOTS"],
+    "leadTime": 20,
+    "reliability": 91,
+    "productCost": 23.50,
+    "minOrderQuantity": 800,
+    "specialties": ["Luxury Fabrics", "Wool Blends"],
+    "rating": 4.8,
+    "yearsInBusiness": 20,
+    "contact": {
+      "email": "info@milanfashion.it",
+      "phone": "+39 02 1234 5678"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Los Angeles Apparel Co",
+    "country": "USA",
+    "city": "Los Angeles",
+    "coordinates": [34.0522, -118.2437],
+    "certifications": ["ISO 9001", "WRAP"],
+    "leadTime": 18,
+    "reliability": 90,
+    "productCost": 22.10,
+    "minOrderQuantity": 950,
+    "specialties": ["T-Shirts", "Activewear"],
+    "rating": 4.5,
+    "yearsInBusiness": 10,
+    "contact": {
+      "email": "contact@laapparel.com",
+      "phone": "+1 213 555 0198"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Cairo Cotton Company",
+    "country": "Egypt",
+    "city": "Cairo",
+    "coordinates": [30.0444, 31.2357],
+    "certifications": ["ISO 9001", "Fair Trade"],
+    "leadTime": 24,
+    "reliability": 88,
+    "productCost": 20.30,
+    "minOrderQuantity": 1050,
+    "specialties": ["Cotton Sheets", "Egyptian Cotton"],
+    "rating": 4.2,
+    "yearsInBusiness": 16,
+    "contact": {
+      "email": "info@cairocotton.eg",
+      "phone": "+20 2 2345 6789"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Bangkok Garment Exporters",
+    "country": "Thailand",
+    "city": "Bangkok",
+    "coordinates": [13.7563, 100.5018],
+    "certifications": ["ISO 9001", "BSCI"],
+    "leadTime": 21,
+    "reliability": 93,
+    "productCost": 18.70,
+    "minOrderQuantity": 1150,
+    "specialties": ["Garments", "Polyester Blends"],
+    "rating": 4.4,
+    "yearsInBusiness": 13,
+    "contact": {
+      "email": "sales@bangkokgarments.co.th",
+      "phone": "+66 2 345 6789"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Hanoi Textile Group",
+    "country": "Vietnam",
+    "city": "Hanoi",
+    "coordinates": [21.0285, 105.8542],
+    "certifications": ["ISO 9001", "OEKO-TEX"],
+    "leadTime": 23,
+    "reliability": 90,
+    "productCost": 17.60,
+    "minOrderQuantity": 1250,
+    "specialties": ["Textiles", "Cotton Blends"],
+    "rating": 4.3,
+    "yearsInBusiness": 11,
+    "contact": {
+      "email": "info@hanoitextile.vn",
+      "phone": "+84 24 1234 5678"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Johannesburg Wool Traders",
+    "country": "South Africa",
+    "city": "Johannesburg",
+    "coordinates": [-26.2041, 28.0473],
+    "certifications": ["ISO 9001", "Fair Trade"],
+    "leadTime": 26,
+    "reliability": 86,
+    "productCost": 20.80,
+    "minOrderQuantity": 1000,
+    "specialties": ["Wool", "Wool Blends"],
+    "rating": 4.1,
+    "yearsInBusiness": 17,
+    "contact": {
+      "email": "contact@johannesburgwool.co.za",
+      "phone": "+27 11 234 5678"
+    }
+  },
+  {
+    "id": 11,
+    "name": "Dubai Textile Trading",
+    "country": "UAE",
+    "city": "Dubai",
+    "coordinates": [25.2769, 55.2962],
+    "certifications": ["ISO 9001", "BSCI"],
+    "leadTime": 20,
+    "reliability": 92,
+    "productCost": 21.50,
+    "minOrderQuantity": 1100,
+    "specialties": ["Silk Fabrics", "Luxury Textiles"],
+    "rating": 4.6,
+    "yearsInBusiness": 15,
+    "contact": {
+      "email": "info@dubaitextile.ae",
+      "phone": "+971 4 234 5678"
+    }
+  },
+  {
+    "id": 12,
+    "name": "Moscow Textile Factory",
+    "country": "Russia",
+    "city": "Moscow",
+    "coordinates": [55.7558, 37.6176],
+    "certifications": ["ISO 9001", "OEKO-TEX"],
+    "leadTime": 25,
+    "reliability": 89,
+    "productCost": 19.80,
+    "minOrderQuantity": 1200,
+    "specialties": ["Denim Jeans", "Washed Denim"],
+    "rating": 4.4,
+    "yearsInBusiness": 18,
+    "contact": {
+      "email": "sales@moscowtextile.ru",
+      "phone": "+7 495 123 4567"
+    }
+  },
+  {
+    "id": 13,
+    "name": "Santiago Cotton Mills",
+    "country": "Chile",
+    "city": "Santiago",
+    "coordinates": [-33.4489, -70.6693],
+    "certifications": ["ISO 9001", "Fair Trade"],
+    "leadTime": 28,
+    "reliability": 85,
+    "productCost": 18.20,
+    "minOrderQuantity": 1050,
+    "specialties": ["Cotton Yarn", "Organic Cotton"],
+    "rating": 4.2,
+    "yearsInBusiness": 13,
+    "contact": {
+      "email": "contact@santiagocotton.cl",
+      "phone": "+56 2 2345 6789"
+    }
+  }
+]

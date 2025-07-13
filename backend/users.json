@@ -1,0 +1,18 @@
+[
+  {
+    "email": "Walmart@walmart.com",
+    "password": "12345678"
+  },
+  {
+    "email": "abc@walmart.com",
+    "password": "12310"
+  },
+  {
+    "email": "ac@walmart.com",
+    "password": "ac@walmart.com"
+  },
+  {
+    "email": "a@walmart.com",
+    "password": "ac@walmart.com"
+  }
+]

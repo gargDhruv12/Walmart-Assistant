@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Calculator, TrendingUp, AlertCircle, Download } from 'lucide-react'
-import { suppliers, tariffData, ports, destinationPorts } from '../../data/mockData'
+import { useState, useEffect } from 'react';
+import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
+import { Calculator, TrendingUp, AlertCircle, Download } from 'lucide-react';
+import { suppliers, tariffData, ports, destinationPorts } from '../../data/mockData';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const CostEstimator = () => {
   const [formData, setFormData] = useState({
@@ -8,11 +10,22 @@ const CostEstimator = () => {
     hsCode: '6203',
     quantity: 5000,
     selectedSuppliers: []
-  })
+  });
+  const [estimates, setEstimates] = useState([]);
+  const [comparison, setComparison] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [estimates, setEstimates] = useState([])
-  const [comparison, setComparison] = useState(null)
-  const [loading, setLoading] = useState(false)
+  // Wizard logic
+  const steps = [
+    'Dashboard',
+    'Supplier Finder',
+    'Tariff Checker',
+    'Route Planner',
+    'Cost Estimator'
+  ];
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isWizard = new URLSearchParams(location.search).get('wizard') === '1';
 
   const handleSupplierToggle = (supplierId) => {
     const currentSelected = formData.selectedSuppliers
@@ -157,6 +170,21 @@ const CostEstimator = () => {
 
   return (
     <div className="cost-estimator">
+      {isWizard && (
+        <Box sx={{ maxWidth: 900, mx: 'auto', mt: 2, mb: 2 }}>
+          <Stepper activeStep={4} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+            <Button variant="outlined" onClick={() => navigate('/routes?wizard=1')}>Back</Button>
+            <Button variant="contained" color="success" onClick={() => navigate('/?wizard=1')}>Finish</Button>
+          </Box>
+        </Box>
+      )}
       <div className="page-header">
         <h1>Landed Cost Estimator</h1>
         <p>Calculate and compare total landed costs across suppliers</p>

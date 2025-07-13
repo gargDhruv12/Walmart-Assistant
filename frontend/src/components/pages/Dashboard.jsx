@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   Globe, 
   TrendingUp, 
@@ -11,6 +11,7 @@ import {
   CheckCircle
 } from 'lucide-react'
 import { suppliers, routes, tariffData } from '../../data/mockData'
+import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -50,6 +51,18 @@ const Dashboard = () => {
       status: "error"
     }
   ])
+
+  const steps = [
+    'Dashboard',
+    'Supplier Finder',
+    'Tariff Checker',
+    'Route Planner',
+    'Cost Estimator'
+  ];
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isWizard = new URLSearchParams(location.search).get('wizard') === '1';
 
   useEffect(() => {
     // Calculate dashboard statistics
@@ -116,6 +129,25 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      {!isWizard && (
+        <Box sx={{ maxWidth: 900, mx: 'auto', mt: 2, mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
+          <Button variant="contained" onClick={() => navigate('/suppliers?wizard=1')}>Estimate</Button>
+        </Box>
+      )}
+      {isWizard && (
+        <Box sx={{ maxWidth: 900, mx: 'auto', mt: 2, mb: 2 }}>
+          <Stepper activeStep={0} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+            <Button variant="contained" onClick={() => navigate('/suppliers?wizard=1')}>Estimate</Button>
+          </Box>
+        </Box>
+      )}
       <div className="dashboard-header">
         <h1>Global Trade Dashboard</h1>
         <p>Monitor your supply chain operations and trade activities</p>

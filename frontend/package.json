@@ -10,13 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@deck.gl/mesh-layers": "^9.1.13",
+    "@tailwindcss/vite": "^4.1.11",
+    "deck.gl": "^9.1.13",
+    "jspdf": "^2.5.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.400.0",
+    "maplibre-gl": "^5.6.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0",
-    "leaflet": "^1.9.4",
     "react-leaflet": "^4.2.1",
-    "lucide-react": "^0.400.0",
-    "jspdf": "^2.5.1"
+    "react-map-gl": "^6.1.20",
+    "react-router-dom": "^6.26.0",
+    "tailwindcss": "^4.1.11",
+    "three": "^0.178.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
