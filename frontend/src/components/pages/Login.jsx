@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../utils/api';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('http://localhost:3000/api/users');
+      const res = await api.getUsers();
       const users = await res.json();
       const user = users.find(u => u.email === email && u.password === password);
       if (user) {
@@ -42,7 +43,7 @@ const Login = ({ onLogin }) => {
       return;
     }
     try {
-      const res = await fetch('http://localhost:3000/api/users', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: signUpEmail, password: signUpPassword }) });
+      const res = await api.createUser({ email: signUpEmail, password: signUpPassword });
       if (res.ok) {
         setShowSignUp(false);
         setEmail(signUpEmail);

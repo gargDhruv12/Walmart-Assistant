@@ -3,6 +3,7 @@ import { Calculator, Info, TrendingUp, AlertCircle } from 'lucide-react';
 import { sampleProducts, suppliers } from '../../data/mockData';
 import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { api } from '../../utils/api';
 
 const TariffChecker = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ const TariffChecker = () => {
   }, [location.state])
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/tariffs')
+    api.getTariffs()
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch tariffs')
         return res.json()

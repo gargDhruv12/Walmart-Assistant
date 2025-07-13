@@ -7,6 +7,7 @@ import { Ship, Clock, DollarSign, AlertTriangle, Navigation, ArrowLeft, ArrowRig
 import { destinationPorts, routes, suppliers } from '../../data/mockData'
 import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { api } from '../../utils/api';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json'; // More colorful Carto Voyager style
@@ -45,7 +46,7 @@ const RoutePlanner = () => {
   const isWizard = new URLSearchParams(location.search).get('wizard') === '1';
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/ports')
+    api.getPorts()
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch ports')
         return res.json()

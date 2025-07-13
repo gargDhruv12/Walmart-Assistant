@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Search, Filter, MapPin, Star, Clock, DollarSign, Award } from 'lucide-react'
 import { Stepper, Step, StepLabel, Button, Box } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { api } from '../../utils/api';
 
 const SupplierFinder = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -35,7 +36,7 @@ const SupplierFinder = () => {
   const isWizard = new URLSearchParams(location.search).get('wizard') === '1';
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/suppliers')
+    api.getSuppliers()
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch suppliers')
         return res.json()

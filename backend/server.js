@@ -13,6 +13,15 @@ app.get('/', (req, res) => {
   res.send('Walmart Assistant backend is running!');
 });
 
+// Health check endpoint for monitoring
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'healthy', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
 // Add your API routes here
 
 app.get('/api/suppliers', (req, res) => {
